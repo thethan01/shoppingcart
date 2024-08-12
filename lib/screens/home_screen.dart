@@ -28,37 +28,37 @@ class HomeScreen extends StatelessWidget {
           builder: (context, state) {
             return Column(
               children: [
-                if(state.isHotProductsLoading)
-                  CircularProgressIndicator()else
-                Row(
-                  children: [
-                    Builder(builder: (context) {
-                      final width =
-                          (widthScreen(context) - paddingDefault * 3) / 2.5;
-                      return Expanded(
-                        child: SizedBox(
-                          height: width * 1.5,
-                          child: ListView.separated(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: paddingDefault),
-                            itemBuilder: (context, index) => CardProduct(
-                              product: Product(
-                                  id: 'id',
-                                  name: 'name',
-                                  price: 1,
-                                  image:
-                                      'assets/images/product_${index.toString()[index.toString().length - 1]}.jpg'),
-                              width: width,
+                
+                if (state.isHotProductsLoading)
+                  const CircularProgressIndicator()
+                else
+                  Row(
+                    children: [
+                      Builder(builder: (context) {
+                        final width =
+                            (widthScreen(context) - paddingDefault * 3) / 2.5;
+                        return Expanded(
+                          child: SizedBox(
+                            height: width * 1.5,
+                            child: ListView.separated(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: paddingDefault),
+                              itemBuilder: (context, index) {
+                                final product = state.hotProducts[index];
+                                return CardProduct(
+                                  product: product,
+                                  width: width,
+                                );
+                              },
+                              separatorBuilder: (context, index) => w(12),
+                              itemCount: state.hotProducts.length,
+                              scrollDirection: Axis.horizontal,
                             ),
-                            separatorBuilder: (context, index) => w(12),
-                            itemCount: 10,
-                            scrollDirection: Axis.horizontal,
                           ),
-                        ),
-                      );
-                    })
-                  ],
-                )
+                        );
+                      })
+                    ],
+                  )
               ],
             );
           },
