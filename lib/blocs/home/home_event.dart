@@ -9,7 +9,12 @@ class InitProducts extends HomeEvent {
   List<Object?> get props => [];
 }
 
-class LoadMoreProducts extends HomeEvent {
+class LoadMoreAllProducts extends HomeEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class LoadMoreHotProducts extends HomeEvent {
   @override
   List<Object?> get props => [];
 }

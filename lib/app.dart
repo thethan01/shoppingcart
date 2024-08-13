@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopping_cart/blocs/cart/cart_bloc.dart';
 import 'package:shopping_cart/blocs/home/home_bloc.dart';
 import 'package:shopping_cart/import.dart';
 
@@ -9,6 +10,7 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => HomeBloc()..add(InitProducts())),
+        BlocProvider(create: (_) => CartBloc()),
       ],
       child: MaterialApp(
         title: 'Shopping Cart',

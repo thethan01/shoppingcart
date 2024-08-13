@@ -1,8 +1,8 @@
 part of 'home_bloc.dart';
 
 class HomeState extends Equatable {
-  final List<Product> hotProducts;
-  final List<Product> allProducts;
+  final List<ProductModel> hotProducts;
+  final List<ProductModel> allProducts;
   final bool isHotProductsLoading;
   final bool isAllProductsLoading;
   const HomeState(
@@ -16,8 +16,8 @@ class HomeState extends Equatable {
       [hotProducts, allProducts, isHotProductsLoading, isAllProductsLoading];
 
   HomeState copyWith({
-    List<Product>? hotProducts,
-    List<Product>? allProducts,
+    List<ProductModel>? hotProducts,
+    List<ProductModel>? allProducts,
     bool? isAllProductsLoading,
     bool? isHotProductsLoading,
   }) {
