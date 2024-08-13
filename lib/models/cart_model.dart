@@ -6,4 +6,5 @@ class CartModel {
 
   const CartModel(
       {required this.product, this.quantity = 0});
+
 }

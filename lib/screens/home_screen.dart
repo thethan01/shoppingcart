@@ -105,8 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Text(
                               'Hot product'.toUpperCase(),
-                              style: const TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
+                              style: StyleUtils.categoryTitle,
                             ),
                             Icon(
                               Icons.local_fire_department,
@@ -159,8 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.all(paddingDefault),
                     child: Text(
                       'All product'.toUpperCase(),
-                      style: const TextStyle(
-                          fontSize: 17, fontWeight: FontWeight.bold),
+                      style: StyleUtils.categoryTitle,
                     ),
                   ),
                 ),

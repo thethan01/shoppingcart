@@ -5,6 +5,7 @@ class StyleUtils {
   static TextStyle get title =>
       const TextStyle(fontSize: 17, fontWeight: FontWeight.bold);
   static TextStyle get bold => const TextStyle(fontWeight: FontWeight.bold);
+  static TextStyle get primary =>  TextStyle(color: AppColors.primary);
   static TextStyle get categoryTitle => TextStyle(
       fontWeight: FontWeight.bold, fontSize: 20, color: AppColors.secondary);
 }

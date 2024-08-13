@@ -41,7 +41,7 @@ class _BottomAddCartState extends State<BottomAddCart> {
                 price = widget.product.price * quantity;
               });
             },
-            onTapX: () => Navigator.of(context).pop(),
+            onTapX: (_) => Navigator.of(context).pop(),
             onTapQuantity: (product, value) {
               setState(() {
                 quantity = value;

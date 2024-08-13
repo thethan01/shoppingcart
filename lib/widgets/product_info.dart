@@ -6,7 +6,7 @@ class ProductInfo extends StatelessWidget {
   final ProductModel product;
   final int quantity;
   final int price;
-  final VoidCallback? onTapX;
+  final Function(ProductModel product)? onTapX;
   final Function(ProductModel product)? onTapPlus;
   final Function(ProductModel product)? onTapMinus;
   final Function(ProductModel product, int value)? onTapQuantity;
@@ -66,7 +66,7 @@ class ProductInfo extends StatelessWidget {
                     w(12),
                     InkWell(
                       onTap: () {
-                        onTapX?.call();
+                        onTapX?.call(product);
                       },
                       child: Container(
                         padding: const EdgeInsets.all(4),
@@ -91,9 +91,7 @@ class ProductInfo extends StatelessWidget {
                         children: [
                           buttonChange(
                             onTap: () {
-                              if (quantity > 0) {
-                                onTapMinus?.call(product);
-                              }
+                              onTapMinus?.call(product);
                             },
                           ),
                           Expanded(
@@ -123,9 +121,7 @@ class ProductInfo extends StatelessWidget {
                           ),
                           buttonChange(
                               onTap: () {
-                                if (quantity < 1000) {
-                                  onTapPlus?.call(product);
-                                }
+                                onTapPlus?.call(product);
                               },
                               icon: CupertinoIcons.plus),
                         ],
@@ -136,7 +132,7 @@ class ProductInfo extends StatelessWidget {
                         child: Text(
                       currency(price),
                       textAlign: TextAlign.end,
-                      style: StyleUtils.bold,
+                      style: StyleUtils.primary,
                     )),
                   ],
                 ),

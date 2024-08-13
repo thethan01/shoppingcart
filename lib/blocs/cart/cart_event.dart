@@ -16,8 +16,10 @@ class RemoveFromCart extends CartEvent {
 
 class ChangeQuantityProduct extends CartEvent {
   final ProductModel product;
-  final int quantity;
-  ChangeQuantityProduct(this.product, this.quantity);
+  final int value;
+  final int? quantity;
+  ChangeQuantityProduct(
+      {this.quantity, required this.product, this.value = 0});
 }
 
 class OrderCart extends CartEvent {}

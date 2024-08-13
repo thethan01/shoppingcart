@@ -48,12 +48,25 @@ class CardProduct extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                          child: Column(
-                        children: [
-                          Text(product.name),
-                          Text(currency(product.price)),
-                        ],
+                          child: Padding(
+                        padding: const EdgeInsets.only(left: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              product.name,
+                              style: StyleUtils.title,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              currency(product.price),
+                              style: StyleUtils.primary,
+                            ),
+                          ],
+                        ),
                       )),
+                      w(4),
                       IconButton(
                           onPressed: () {
                             showBottomSheet(
