@@ -1,8 +1,9 @@
 import 'product_model.dart';
 
 class CartModel {
-  final ProductModel? product;
+  final ProductModel product;
   final int quantity;
 
-  const CartModel({this.product, this.quantity = 0});
+  const CartModel(
+      {required this.product, this.quantity = 0});
 }

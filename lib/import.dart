@@ -5,4 +5,8 @@ export 'package:shopping_cart/screens/splash_screen.dart';
 export 'package:shopping_cart/generated/assets.dart';
 export 'package:shopping_cart/utils/utils.dart';
 export 'package:shopping_cart/utils/color_utils.dart';
+export 'package:shopping_cart/utils/style_utils.dart';
 export 'package:shopping_cart/models/product_model.dart';
+export 'package:flutter_bloc/flutter_bloc.dart';
+export 'package:shopping_cart/widgets/product_info.dart';
+export 'package:shopping_cart/widgets/button_elevated.dart';

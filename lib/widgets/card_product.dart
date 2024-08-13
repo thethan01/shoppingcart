@@ -4,6 +4,8 @@ import 'package:shopping_cart/app.dart';
 import 'package:shopping_cart/blocs/cart/cart_bloc.dart';
 import 'package:shopping_cart/import.dart';
 
+import 'bottom_add_cart.dart';
+
 class CardProduct extends StatelessWidget {
   final double width;
   final ProductModel product;
@@ -54,31 +56,10 @@ class CardProduct extends StatelessWidget {
                       )),
                       IconButton(
                           onPressed: () {
-                            showDialog(
+                            showBottomSheet(
                               context: context,
-                              builder: (context) => Dialog(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(paddingDefault),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(product.name),
-                                      h(paddingDefault),
-                                      TextField(
-                                        inputFormatters: [
-                                          FilteringTextInputFormatter.deny(RegExp(r'[^0-9]')),
-                                        ],
-                                        keyboardType:  TextInputType.number,
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      h(paddingDefault),
-                                      ElevatedButton(onPressed: () {
-                                          context.read<CartBloc>().add(AddToCart(product, 2));
-                                          Navigator.of(context).pop();
-                                      }, child: const Text('SUBMIT'))
-                                    ],
-                                  ),
-                                ),
+                              builder: (context) => BottomAddCart(
+                                product: product,
                               ),
                             );
                           },

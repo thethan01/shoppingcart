@@ -20,4 +20,4 @@ class ChangeQuantityProduct extends CartEvent {
   ChangeQuantityProduct(this.product, this.quantity);
 }
 
-class Order extends CartEvent {}
+class OrderCart extends CartEvent {}
