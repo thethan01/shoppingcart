@@ -11,11 +11,37 @@ part 'cart_state.dart';
 class CartBloc extends Bloc<CartEvent, CartState> {
   final dbHelper = DbHelper();
   CartBloc() : super(const CartState()) {
+    on(_onInitCart);
     on(_onAddProduct);
     on(_onOrder);
     on(_onRemoveFromCart);
     on(_onChangeQuantityProduct);
   }
+
+  Future<void> _onInitCart(
+    InitCart event,
+    Emitter<CartState> emit,
+  ) async {
+    final List<CartModel> res = await dbHelper.getCartProducts();
+    int quantity = 0;
+    int totalPrice = 0;
+    Map<String, CartModel> listCardProduct = {};
+    for (var e in res) {
+      quantity = quantity + e.quantity;
+      totalPrice = totalPrice + e.quantity * e.product.price;
+      listCardProduct.addEntries({
+        e.product.id: CartModel(
+          product: e.product,
+          quantity: e.quantity,
+        )
+      }.entries);
+    }
+    emit(state.copyWith(
+        quantity: quantity,
+        listCartProduct: listCardProduct,
+        totalPrice: totalPrice));
+  }
+
   Future<void> _onAddProduct(
     AddToCart event,
     Emitter<CartState> emit,
@@ -100,6 +126,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ? event.quantity!
           : listCardProduct[event.product.id]!.quantity + event.value,
     );
+    await dbHelper.insertProduct(CartModel(
+      product: event.product,
+      quantity: listCardProduct[event.product.id]!.quantity,
+    ));
     emit(state.copyWith(
         quantity: quantity,
         listCartProduct: listCardProduct,

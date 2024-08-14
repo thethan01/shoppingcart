@@ -6,6 +6,12 @@ class CartEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class InitCart extends CartEvent {
+  InitCart();
+  @override
+  List<Object?> get props => [];
+}
+
 class AddToCart extends CartEvent {
   final ProductModel product;
   final int quantity;

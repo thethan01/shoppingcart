@@ -9,7 +9,7 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => HomeBloc()..add(InitProducts())),
-        BlocProvider(create: (_) => CartBloc()),
+        BlocProvider(create: (_) => CartBloc()..add(InitCart())),
       ],
       child: MaterialApp(
         title: 'Shopping Cart',

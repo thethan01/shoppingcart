@@ -33,7 +33,6 @@ class DbHelper {
   Future<List<CartModel>> getCartProducts() async {
     var dbClient = await db;
     final List<Map<String, dynamic>> maps = await dbClient!.query('Cart');
-
     return List.generate(maps.length, (i) {
       return CartModel(
         product: ProductModel.fromMap(maps[i]),
