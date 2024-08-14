@@ -1,4 +1,3 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_cart/blocs/cart/cart_bloc.dart';
 import 'package:shopping_cart/blocs/home/home_bloc.dart';
 import 'package:shopping_cart/import.dart';

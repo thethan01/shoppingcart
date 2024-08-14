@@ -30,16 +30,20 @@ class _BottomAddCartState extends State<BottomAddCart> {
             quantity: quantity,
             price: price,
             onTapMinus: (_) {
-              setState(() {
-                quantity--;
-                price = widget.product.price * quantity;
-              });
+              if (quantity > 1) {
+                setState(() {
+                  quantity--;
+                  price = widget.product.price * quantity;
+                });
+              }
             },
             onTapPlus: (product) {
-              setState(() {
-                quantity++;
-                price = widget.product.price * quantity;
-              });
+              if (quantity < 999) {
+                setState(() {
+                  quantity++;
+                  price = widget.product.price * quantity;
+                });
+              }
             },
             onTapX: (_) => Navigator.of(context).pop(),
             onTapQuantity: (product, value) {

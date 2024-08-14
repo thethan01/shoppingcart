@@ -36,16 +36,15 @@ class _DialogTextFieldState extends State<DialogTextField> {
               inputFormatters: [
                 FilteringTextInputFormatter.deny(RegExp(r'[^0-9]')),
               ],
-              keyboardType: TextInputType.number,
+              keyboardType: const TextInputType.numberWithOptions(
+                  decimal: false, signed: false),
               textAlign: TextAlign.center,
               decoration: InputDecoration(
                   errorText: parseInt(textController.text) > 999
                       ? 'Quantity cannot exceed 999'
                       : null),
               onChanged: (value) {
-                setState(() {
-
-                });
+                setState(() {});
               },
             ),
             h(paddingDefault),

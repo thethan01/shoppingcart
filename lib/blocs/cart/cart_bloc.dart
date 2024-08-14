@@ -3,12 +3,13 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:shopping_cart/models/cart_model.dart';
 import 'package:shopping_cart/models/product_model.dart';
-import 'package:shopping_cart/widgets/card_product.dart';
+import 'package:shopping_cart/services/db_helper/db_helper.dart';
 
 part 'cart_event.dart';
 part 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
+  final dbHelper = DbHelper();
   CartBloc() : super(const CartState()) {
     on(_onAddProduct);
     on(_onOrder);
@@ -23,22 +24,23 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     int totalPrice = state.totalPrice + event.quantity * event.product.price;
     final Map<String, CartModel> listCardProduct =
         Map.from(state.listCartProduct);
+    late CartModel cartModel;
     if (listCardProduct.containsKey(event.product.id)) {
       final totalQuantity =
           (listCardProduct['event.product.id']?.quantity ?? 0) + quantity;
-      listCardProduct[event.product.id] = CartModel(
+      cartModel = CartModel(
         product: event.product,
         quantity: totalQuantity > 999 ? 999 : totalQuantity,
       );
+      listCardProduct[event.product.id] = cartModel;
     } else {
-      listCardProduct.addEntries({
-        event.product.id: CartModel(
-          product: event.product,
-          quantity: event.quantity,
-        )
-      }.entries);
+      cartModel = CartModel(
+        product: event.product,
+        quantity: event.quantity,
+      );
+      listCardProduct.addEntries({event.product.id: cartModel}.entries);
     }
-
+    await dbHelper.insertProduct(cartModel);
     emit(state.copyWith(
         quantity: quantity,
         listCartProduct: listCardProduct,
@@ -49,6 +51,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     OrderCart event,
     Emitter<CartState> emit,
   ) async {
+    await dbHelper.clearCart();
     emit(state.copyWith(quantity: 0, listCartProduct: {}, totalPrice: 0));
   }
 
@@ -63,6 +66,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             state.listCartProduct[event.product.id]!.product.price);
     final Map<String, CartModel> listCardProduct =
         Map.from(state.listCartProduct)..remove(event.product.id);
+    await dbHelper.deleteProduct(event.product.id);
     emit(state.copyWith(
         quantity: quantity,
         listCartProduct: listCardProduct,

@@ -27,27 +27,27 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     await Future.delayed(const Duration(seconds: 2));
     allProducts.addAll(List.generate(
       20,
-          (index) {
+      (index) {
         final temp = index + 1;
         return ProductModel(
           id: '$temp',
           name: 'Product #$temp',
           price: temp * 10000,
           image:
-          'assets/images/product_${temp.toString()[temp.toString().length - 1]}.jpg',
+              'assets/images/product_${temp.toString()[temp.toString().length - 1]}.jpg',
         );
       },
     ));
     hotProducts.addAll(List.generate(
       20,
-          (index) {
+      (index) {
         final temp = index + 15;
         return ProductModel(
           id: '$temp',
           name: 'Product #$temp',
           price: temp * 10000,
           image:
-          'assets/images/product_${temp.toString()[temp.toString().length - 1]}.jpg',
+              'assets/images/product_${temp.toString()[temp.toString().length - 1]}.jpg',
         );
       },
     ));
@@ -67,7 +67,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final listNewProduct = List.generate(
       10,
       (index) {
-        final temp = index + lengthAllProduct;
+        final temp = index + lengthAllProduct + 1;
         return ProductModel(
           id: '$temp',
           name: 'Product #$temp',
@@ -95,7 +95,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final listNewProduct = List.generate(
       10,
       (index) {
-        final temp = index + lengthAllProduct;
+        final temp = index + lengthAllProduct + 15;
         return ProductModel(
           id: '$temp',
           name: 'Product #$temp',

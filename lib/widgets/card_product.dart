@@ -1,7 +1,3 @@
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopping_cart/app.dart';
-import 'package:shopping_cart/blocs/cart/cart_bloc.dart';
 import 'package:shopping_cart/import.dart';
 
 import 'bottom_add_cart.dart';

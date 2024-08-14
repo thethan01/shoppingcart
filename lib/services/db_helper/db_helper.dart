@@ -1,7 +1,8 @@
 import 'dart:io';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:shopping_cart/models/cart_list_model.dart';
+import 'package:shopping_cart/models/cart_model.dart';
+import 'package:shopping_cart/models/product_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DbHelper {
@@ -18,37 +19,50 @@ class DbHelper {
       path,
       version: 1,
       onCreate: (db, version) {
-        db.execute(
-            "CREATE TABLE Cart(id INTEGER PRIMARY KEY, name TEXT, path TEXT, size TEXT, length TEXT, isCart INTEGER)");
+        db.execute(""" CREATE TABLE Cart(
+                          id TEXT PRIMARY KEY,
+                          name TEXT,
+                          price INTEGER,
+                          image TEXT,
+                          quantity INTEGER)""");
       },
     );
     return db;
   }
 
-  Future<CartListModel> insert(CartListModel model) async {
+  Future<List<CartModel>> getCartProducts() async {
     var dbClient = await db;
-    dbClient!.insert('Cart', model.toMap()).then((value) {});
-    return model;
-  }
+    final List<Map<String, dynamic>> maps = await dbClient!.query('Cart');
 
-  Future<int> delete(
-    String name,
-  ) async {
-    var dbClient = await db;
-    return await dbClient!
-        .delete('Cart', where: 'name = ?', whereArgs: [name]).then((value) {
-      // Utils.showSnackBar('Deleted', 'Task is removed successfully', const Icon(Icons.done,color: Colors.white,size: 16,));
-      return value;
+    return List.generate(maps.length, (i) {
+      return CartModel(
+        product: ProductModel.fromMap(maps[i]),
+        quantity: maps[i]['quantity'],
+      );
     });
   }
 
-  Future<dynamic> getData() async {
+  Future<void> insertProduct(CartModel cartModel) async {
     var dbClient = await db;
-    final List<Map<String, Object?>> queryResult =
-        await dbClient!.query('Cart');
-    print(queryResult);
-    // return queryResult.map((e) {
-    //   return CartModel.fromMap(e);
-    // });
+    await dbClient!.insert(
+      'Cart',
+      {
+        ...cartModel.product.toMap(),
+        'quantity': cartModel.quantity,
+      },
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<void> deleteProduct(
+    String id,
+  ) async {
+    var dbClient = await db;
+    await dbClient!.delete('Cart', where: 'id = ?', whereArgs: [id]);
+  }
+
+  Future<void> clearCart() async {
+    final dbClient = await db;
+    await dbClient!.delete('Cart');
   }
 }

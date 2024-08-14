@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
           child: Image.asset(
         Assets.imagesCart,
-        width: widthScreen(context)  / 3,
+        width: widthScreen(context) / 3,
       )),
       bottomSheet: Padding(
         padding: const EdgeInsets.only(bottom: 40, left: 16, right: 16),
@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Text(
               '© ${DateTime.now().year}, QSoft. All rights reserved.',
-              style: TextStyle(fontSize: 15),
+              style: const TextStyle(fontSize: 15),
               textAlign: TextAlign.center,
             )
           ],

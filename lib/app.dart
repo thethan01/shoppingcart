@@ -1,4 +1,3 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_cart/blocs/cart/cart_bloc.dart';
 import 'package:shopping_cart/blocs/home/home_bloc.dart';
 import 'package:shopping_cart/import.dart';
@@ -44,14 +43,17 @@ class App extends StatelessWidget {
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
                 padding: WidgetStateProperty.all(const EdgeInsets.all(10)),
-                backgroundColor: WidgetStateProperty.all(const Color(0xffef890c)),
+                backgroundColor:
+                    WidgetStateProperty.all(const Color(0xffef890c)),
                 shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(borderRadiusDefault),
                   ),
                 ),
                 textStyle: WidgetStateProperty.all<TextStyle>(const TextStyle(
-                    color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold))),
+                    color: Colors.white,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold))),
           ),
         ),
         debugShowCheckedModeBanner: false,
